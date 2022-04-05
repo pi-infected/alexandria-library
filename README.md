@@ -16,3 +16,5 @@ This could be the nerve center of the knowledge of a village or a community, whi
 
 This repository is a work in progress. It is undocumented up to now.
 For me information, contact me at pirolla40 [at] gmail [dot] com
+
+This project is built on top of the OpenSemanticSearch Engine https://opensemanticsearch.org/
