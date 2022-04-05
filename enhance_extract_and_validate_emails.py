@@ -3,7 +3,7 @@ import etl_plugin_core
 from email_validator import validate_email, EmailNotValidError
 
 
-class enhance_extract_and_validate_email(object):
+class enhance_extract_and_validate_emails(object):
   def process(self, parameters = {}, data = {}):
     text = etl_plugin_core.get_text(data = data)
 

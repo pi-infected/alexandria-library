@@ -1,25 +1,32 @@
 import config
 import re
-from copy import deepcopy
 
 config.delete_indexes = [
-  r'Chroma_.*', r'Component_.*', r'Compression_.*', r'Chroma_.*',
-  r'Content-Type-Parser-Override', r'Data_.*', r'Dimension_.*', r'Exif_.*',
-  r'Data_.*', r'File_.*', r'ICC_.*', r'IHDR', r'Image_.*', r'Number_.*',
-  r'Resolution_Units', r'Thumbnail_.*', r'Transparency_Alpha', r'Version',
-  r'.*_Resolution', r'access_.*', r'embeddedResourceType', r'height', r'pHYs',
-  r'pdf_has.*', r'pdf_unmappedUnicodeCharsPerPage', r'resourceName', r'tiff_.*',
-  r'width', r'xmpTPg_NPages'
+  r'Chroma.*', r'Component.*', r'Compression.*', r'Chroma.*',
+  r'Content-Type-Parser-Override.*', r'Data.*', r'Dimension.*', r'Exif.*',
+  r'File.*', r'ICC.*', r'IHDR.*', r'Image.*', r'Number.*',
+  r'Resolution.Units', r'Thumbnail.*', r'Transparency.Alpha', r'Version.*',
+  r'.*Resolution', r'access.*', r'embeddedResourceType.*', r'height.*', r'pHYs.*',
+  r'pdf.has.*', r'pdf.unmappedUnicodeCharsPerPage.*', r'resourceName.*', r'tiff.*',
+  r'width.*', r'xmpTPg.NPages.*'
 ]
 
 class clean_tika_output_no_ocr(object):
   def process(self, parameters = dict(), data = dict()):
     text = data['content_txt']
     text = re.sub(r'\s*\[Image \(no OCR yet\)\s*\]', '', text)
+    data['content_txt'] = text
 
-    for index in deepcopy(data.keys()):
+    index_list = list()
+    for index in data.keys():
+      index_list.append(index)
+
+    for index in index_list:
       for regex in config.delete_indexes:
+        print(f'{index} - {regex}')
+        import pdb; pdb.set_trace()
         if re.match(regex, index):
+          print(f"deleted index {index}")
           del data[index]
           break
 
