@@ -1,7 +1,7 @@
 import config
 import re
 
-config.delete_indexes = [
+config.delete_regexes = [
   r'Chroma.*', r'Component.*', r'Compression.*', r'Chroma.*',
   r'Content-Type-Parser-Override.*', r'Data.*', r'Dimension.*', r'Exif.*',
   r'File.*', r'ICC.*', r'IHDR.*', r'Image.*', r'Number.*',
@@ -22,9 +22,7 @@ class clean_tika_output_no_ocr(object):
       index_list.append(index)
 
     for index in index_list:
-      for regex in config.delete_indexes:
-        print(f'{index} - {regex}')
-        import pdb; pdb.set_trace()
+      for regex in config.delete_regexes:
         if re.match(regex, index):
           print(f"deleted index {index}")
           del data[index]
