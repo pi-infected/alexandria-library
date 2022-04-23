@@ -390,21 +390,6 @@ def rank_keywords_from_texts(
   return filter_top_keywords(ranked_keywords, top_rank_fraction, top_rank_min, top_rank_max), filter_top_keywords(ranked_keywords)
 
 
-def translate(text, from_lang_code, to_lang_code):
-  if config.translators[from_lang_code][to_lang_code] is None:
-    translator_name = f'translation_{from_lang_code}_to_{to_lang_code}'
-    model_name      = f'Helsinki-NLP/opus-mt-{from_lang_code}-{to_lang_code}'
-    config.translators[from_lang_code][to_lang_code] = pipeline(translator_name, model_name)
-
-  translator = config.translators[from_lang_code][to_lang_code]
-  try:
-    res = translator(text)
-    translated_text = res[0]['translation_text']
-    return translated_text
-  except (BaseException, IndexError):
-    return None
-
-
 def load_tagger(lang_code):
   if lang_code not in config.taggers:
     if not path.exists(f'/home/infected/stanza_resources/{lang_code}/default.zip'):
