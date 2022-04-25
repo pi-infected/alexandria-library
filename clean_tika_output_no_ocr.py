@@ -24,7 +24,6 @@ class clean_tika_output_no_ocr(object):
     for index in index_list:
       for regex in config.delete_regexes:
         if re.match(regex, index):
-          print(f"deleted index {index}")
           del data[index]
           break
 

@@ -3,7 +3,7 @@ import config
 config.delete_indexes = [
   'currency_ss_taxonomy0_ss', 'currency_ss', 'money_ss',
   'currency_ss_matchtext_ss', 'currency_ss_uri_ss',
-  'currency_ss_preflabel_and_uri_ss'
+  'currency_ss_preflabel_and_uri_ss', 'tag_set', 'tag_set_str'
 ]
 
 class delete_tags(object):
